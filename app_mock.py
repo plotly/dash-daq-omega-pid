@@ -899,8 +899,11 @@ def data_set(temperature, command, start, start_button, PID_setpoint, dev_gain, 
     if command == "START":
         diff = int(time.time() - start)
         PID_setpoint = int(PID_setpoint)
+        if diff > 99:
+            return PID_setpoint
         PID_setpoint = float(PID_setpoint)
         PID_setpoint = str(PID_setpoint)
+
         measured_value = df.loc[diff, PID_setpoint]
         return measured_value
         
@@ -941,7 +944,11 @@ def PID_percent(n_intervals, command, start, PID_setpoint, dev_gain, pro_gain, i
         PID_setpoint = float(PID_setpoint)
         PID_setpoint = str(PID_setpoint)
         
-
+        if diff > 99:
+            output = 0
+            output = "%.3f" % output
+            output = (f"{output:{5}.{5}}")
+            return output
         measured_value = df.loc[diff, PID_setpoint]
         if measured_value > PID_int:
             output = 0
@@ -955,6 +962,8 @@ def PID_percent(n_intervals, command, start, PID_setpoint, dev_gain, pro_gain, i
         integral = integrate.quad(lambda t: error, 0, diff)
         derivative = error - previous_error
         output = abs(pro_gain * error + int_gain * integral[0] + dev_gain * derivative)
+        if output > 100:
+            output = 100
         output = "%.3f" % output
         output = (f"{output:{5}.{5}}")
         print(output)
