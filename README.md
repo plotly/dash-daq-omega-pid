@@ -108,6 +108,6 @@ Open the web address given to you in your browser and the application will be re
 * Stop: Stop PID controller and stop graphing data.
 
 ## Resources
-This application was controlled through the MODBUS, using the minimalmodbus library, which can be found [here](http://minimalmodbus.readthedocs.io/en/master/apiminimalmodbus.html). In order to determine outputs, inputs, and any other information related to the controller refer to the manual [here](https://www.omega.com/manuals/manualpdf/M5451.pdf). For a list of commands that can be written/read to the controller refer to the MODBUS manual [here](https://www.omega.com/manuals/manualpdf/M5458.pdf)
+This application was controlled through the MODBUS, using the minimalmodbus library, which can be found [here](http://minimalmodbus.readthedocs.io/en/master/apiminimalmodbus.html). In order to determine outputs, inputs, and any other information related to the controller refer to the manual [here](https://www.omega.com/manuals/manualpdf/M5451.pdf). For a list of commands that can be written/read to the controller refer to the MODBUS manual [here](https://www.omega.com/manuals/manualpdf/M5458.pdf).
 
  
