@@ -15,7 +15,7 @@ app = dash.Dash(__name__)
 server = app.server
 app.scripts.config.serve_locally = True
 
-df = pd.read_csv("file.csv")
+df = pd.read_csv("control_curves.csv")
 
 def rgb_convert_hex(r, g, b):
     return '#%02x%02x%02x' % (r, g, b)
@@ -101,9 +101,17 @@ app.layout = html.Div(
                                     go.Scatter(
                                         x=[""],
                                         y=[""],
-                                        mode='markers',
-                                        marker={'size': 6}
-                                    )
+                                        mode='lines',
+                                        marker={'size': 6},
+                                        name="Temperature (C°)"
+                                    ),
+                                    go.Scatter(
+                                        x=[""],
+                                        y=[""],
+                                        mode='lines',
+                                        marker={'size': 6},
+                                        name="Set Point (C°)"
+                                    ),
                                 ],
                                 'layout': go.Layout(
                                     xaxis={
@@ -1014,17 +1022,17 @@ def graph_data(temperature, figure, command, start, start_button, PID, data_set)
     if command == "START":
         x = figure["data"][0]['x']
         y = figure["data"][0]['y']
-        
-
+        set_point = figure["data"][1]['y']
+       
         time_now = datetime.datetime.now().strftime("%H:%M:%S")
       
         x.append(time_now)
         y.append(data_set)
-
+        set_point.append(PID)
     if command == "RESET":
         x = [""]
         y = [""]
-        PID = 0
+        set_point = [""]
         time_now = 0
     return {
         'data': [
@@ -1033,7 +1041,14 @@ def graph_data(temperature, figure, command, start, start_button, PID, data_set)
                 y=y,
                 mode='lines',
                 marker={'size': 6},
-                name="Temperature"
+                name="Temperature (C°)"
+            ),
+            go.Scatter(
+                x=x,
+                y=set_point,
+                mode='lines',
+                marker={'size': 6},
+                name="Set Point (C°)"
             )
         ],
         'layout': go.Layout(
@@ -1042,21 +1057,9 @@ def graph_data(temperature, figure, command, start, start_button, PID, data_set)
             xaxis={
                 'title': 'Time (s)', "autorange": True},
             yaxis={
-                'title': 'Temperature(C)', "autorange": True},
+                'title': 'Temperature(C°)', "autorange": True},
             margin={
                 'l': 70, 'b': 100, 't': 0, 'r': 25},
-            shapes=[
-                {'type':'line',
-                    'x0':0,
-                    'y0':PID,
-                    'x1':time_now,
-                    'y1':PID,
-                    'line': {
-                        'color': '#EF553B',
-                        'width': 2,
-                    },
-                    },
-                    ]
         )
     }
 
