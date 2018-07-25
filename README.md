@@ -23,35 +23,66 @@ To install all of the required packages to this conda environment, simply run:
 
 ```
 pip install -r requirements.txt
-conda install -c poehlmann python-seabreeze
 ```
 
-and all of the required `pip` packages, as well as the //Have to test this method// package, will be installed, and the app will be able to run.
+and all of the required `pip` packages,  will be installed, and the app will be able to run.
  
 ## How to use the app
-Here, you should put the command needed to run your app, and then the steps that the user should take to use it. You should include screenshots of the app running in your own browser to make it easier to follow along. 
+There are two versions of this application. A mock version for the user to play with, without any instruments connected, and a local version, that can be connected to a device.
 
-Then, show a step-by-step guide of how your app works, and what each control does.
+### Local Application
+If you would like to run the **local version**, please ensure whether your device is configured using the **LOW VOLTAGE POWER OPTION** (12 VDC - 36 VDC or 24 VAC) or the **AC POWER OPTION** (110 VDC - 300 VDC or 90 VAC - 240VAC), and power it accordingly. For the setup used in testing this application, the **LOW VOLTAGE POWER OPTION** was set, where the PID controller was powered with 12 VDC. This application is made to use **OUTPUT 1** of the system, with **Thermocouples** as the input. If you are having troubles connecting the device, you may need to install the drivers which can be found [here](ftp://ftp.omega.com/public/TEMPERATUREGroup/products/CnPt/USB_Driver/).
 
-If possible, include screenshots of something in the app failing, and, if any, the steps that the user can take to correct the error.
+When the drivers are properly installed you will see something like this highlighted port:
 
-There are two versions of this application. A mock version for the user to play with without any instruments connected, and a local version, that can be connected to a device.
 
-If you would like to run the local version, please connect the device to the USB port on your computer, and run in the command line:
+
+Open **app.py** and insert the **COM PORT/PATH** of the PID controller connection, where it is asked:
+
+![changefail](screenshots/connection.JPG)
+
+When the device is ready run in the command line:
 ``` 
 python app.py
 ```
+![changefail](screenshots/pythonapp.jpg)
+
+and you should see this:
+
+![changefail](screenshots/runapp.JPG)
+
+Open the web address given to you in your browser and the application will be ready for use:
+
+![changefail](screenshots/openport.JPG)
 
 If the app is run, but the device is not connected you will see something like this:
 
+![changefail](screenshots/no_connection.JPG)
 
+If issues arise try the following:
+1. Unpluging all connections and plugging them back in
+2. Checking to see if correct **COM PORT/PATH** is selected
+3. Ensuring proper voltage is applied to the controller 
+4. Perform a factory reset on the controller (refer to heading 6.13 of the [manual](https://www.omega.com/manuals/manualpdf/M5451.pdf)
+5. Reinstalling the drivers
 
-If you would like to run the mock version, run in the command line:
+### Mock Application
+If you would like to run the __**mock version**__, run in the command line:
 
 ```
-python app_mock.py demo
+python app_mock.py 
 ```
-A step by step guide with photos is provided below:
+
+![changefail](screenshots/pythonapp_mock.jpg)
+
+and you should see this:
+
+![changefail](screenshots/runmock.JPG)
+
+Open the web address given to you in your browser and the application will be ready for use:
+
+![changefail](screenshots/openport.JPG)
+
 ### Controls
 * Reset: Reset graph.
 * PID%: The percentage of output applied to system.
@@ -66,7 +97,7 @@ A step by step guide with photos is provided below:
 * Integral Gain: The integral gain of the controller.
 * Out 1: Output on/off.
 * Set PID (Button): Set PID parameters in manual.
-* Autotune (Button): Start Autotune, for optimized PID parameters.
+* Autotune (Button): Start Autotune, for optimized PID parameters. If Autotune fails (running status: fault), your system is not optomized for this and you will have to manually tune your PID controller.
 * Adaptive Control: Fuzzy logic control more [here](https://www.omega.ca/technical-learning/pid-fuzzy-logic-adaptive-control.html)
 * Couple: The thermocouple type used.
 * Refresh: Refresh rate of graph.
