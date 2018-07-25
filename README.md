@@ -31,7 +31,7 @@ and all of the required `pip` packages,  will be installed, and the app will be 
 There are two versions of this application. A mock version for the user to play with, without any instruments connected, and a local version, that can be connected to a device.
 
 ### Local Application
-If you would like to run the **local version**, please ensure whether your device is configured using the **LOW VOLTAGE POWER OPTION** (12 VDC - 36 VDC or 24 VAC) or the **AC POWER OPTION** (110 VDC - 300 VDC or 90 VAC - 240VAC), and power it accordingly. For the setup used in testing this application, the **LOW VOLTAGE POWER OPTION** was set, where the PID controller was powered with 12 VDC. This application is made to use **OUTPUT 1** of the system, with **Thermocouples** as the input. If you are having troubles connecting the device, you may need to install the drivers which can be found [here](ftp://ftp.omega.com/public/TEMPERATUREGroup/products/CnPt/USB_Driver/).
+If you would like to run the **local version**, please ensure whether your device is configured using the **LOW VOLTAGE POWER OPTION** (12 VDC - 36 VDC or 24 VAC) or the **AC POWER OPTION** (110 VDC - 300 VDC or 90 VAC - 240VAC), and power it accordingly. For the setup used in testing this application, the **LOW VOLTAGE POWER OPTION** was set, where the PID controller was powered with 12 VDC. This application is made to use **OUTPUT 1** of the system, with **Thermocouples** as the input. If you are having troubles connecting the device, you may need to install the drivers which can be found here: ftp://ftp.omega.com/public/TEMPERATUREGroup/products/CnPt/USB_Driver/. 
 
 When the drivers are properly installed you will see something like this highlighted port:
 
