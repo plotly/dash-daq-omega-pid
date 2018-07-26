@@ -100,19 +100,20 @@ app.layout = html.Div(
                         ),
                         dcc.Graph(
                             id="graph-data",
-                            style={"height": "254px"},
+                            style={"height": "254px",
+                                   "marginBottom":"1%"},
                             figure={
                                 'data': [
                                     go.Scatter(
-                                        x=[""],
-                                        y=[""],
+                                        x=[],
+                                        y=[],
                                         mode='lines',
                                         marker={'size': 6},
                                         name="Temperature (C°)"
                                     ),
                                     go.Scatter(
-                                        x=[""],
-                                        y=[""],
+                                        x=[],
+                                        y=[],
                                         mode='lines',
                                         marker={'size': 6},
                                         name="Set Point (C°)"
@@ -972,7 +973,7 @@ def serial_monitor(intervals):
 )
 def graph_data(temperature, figure, command, start, start_button, PID):
 
-    if command == "START" or command == "MANUAL":
+    if command == "START" or command == "MANUAL" and x is not None:
         diff = int(time.time() - start)
 
         time_now = datetime.datetime.now().strftime("%H:%M:%S")
@@ -987,10 +988,11 @@ def graph_data(temperature, figure, command, start, start_button, PID):
         y.append(temperature)
         set_point.append(PID)
 
-    elif command == "RESET":
-        x = [""]
-        y = [""]
-        set_point = [""]
+    elif command == "RESET" or x is None:
+        x = []
+        y = []
+        set_point = []
+    
     return {
         'data': [
             go.Scatter(

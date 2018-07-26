@@ -95,19 +95,20 @@ app.layout = html.Div(
                         ),
                         dcc.Graph(
                             id="graph-data",
-                            style={"height": "254px"},
+                            style={"height": "254px",
+                                   "marginBottom":"1%"},
                             figure={
                                 'data': [
                                     go.Scatter(
-                                        x=[""],
-                                        y=[""],
+                                        x=[],
+                                        y=[],
                                         mode='lines',
                                         marker={'size': 6},
                                         name="Temperature (C°)"
                                     ),
                                     go.Scatter(
-                                        x=[""],
-                                        y=[""],
+                                        x=[],
+                                        y=[],
                                         mode='lines',
                                         marker={'size': 6},
                                         name="Set Point (C°)"
@@ -297,7 +298,7 @@ app.layout = html.Div(
                                                     size=75,
                                                     labelPosition="bottom",
                                                     style={"paddingBottom":"25%"},
-                                                    disabled = True
+                                                    disabled = False
                                                 ),
                                                 daq.StopButton(
                                                     id="autotune-button",
@@ -381,7 +382,7 @@ app.layout = html.Div(
                                                     size=75,
                                                     labelPosition="bottom",
                                                     style={"paddingBottom":"13%"},
-                                                    disabled = True
+                                                    disabled = False
                                                 ),
                                                 daq.NumericInput(
                                                     id="dev-gain",
@@ -392,7 +393,7 @@ app.layout = html.Div(
                                                     size=75,
                                                     labelPosition="bottom",
                                                     style={"paddingBottom":"21%"},
-                                                    disabled = True
+                                                    disabled = False
                                                 ),
                                                 daq.StopButton(
                                                     id="manual-button",
@@ -426,7 +427,7 @@ app.layout = html.Div(
                                                     size=75,
                                                     labelPosition="bottom",
                                                     style={"paddingBottom":"5%"},
-                                                    disabled = True
+                                                    disabled = False
                                                 ),
                                                 daq.NumericInput(
                                                     id="int-gain",
@@ -437,7 +438,7 @@ app.layout = html.Div(
                                                     size=75,
                                                     labelPosition="bottom",
                                                     style={"paddingBottom":"6%"},
-                                                    disabled = True
+                                                    disabled = False
                                                 ),
                                                 html.Div(
                                                     [
@@ -1030,9 +1031,9 @@ def graph_data(temperature, figure, command, start, start_button, PID, data_set)
         y.append(data_set)
         set_point.append(PID)
     if command == "RESET":
-        x = [""]
-        y = [""]
-        set_point = [""]
+        x = []
+        y = []
+        set_point = []
         time_now = 0
     return {
         'data': [
