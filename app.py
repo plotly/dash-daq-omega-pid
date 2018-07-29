@@ -20,7 +20,7 @@ app.scripts.config.serve_locally = True
 
 
 # Insert COM PORT/PATH here
-ser = minimalmodbus.Instrument("COM14", 1, mode="rtu")
+ser = minimalmodbus.Instrument("Insert COM PORT/PATH here", 1, mode="rtu")
 app.config["suppress_callback_exceptions"] = True
 
 
@@ -891,7 +891,6 @@ def command_string(start_button, stop_button, reset_button, autotune_button):
         "AUTO": autotune_button,
     }
     recent_command = max(master_command, key=master_command.get)
-    print(recent_command)
     return recent_command
 
 
