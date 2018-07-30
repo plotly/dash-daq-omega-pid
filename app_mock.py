@@ -40,7 +40,7 @@ app.layout = html.Div(
             id="container",
             style={"background-color": "#119DFF"},
             children=[
-                html.H2("Dash DAQ: Omega Platnium Controller"),
+                html.H2("Dash DAQ: Omega Platinum Controller"),
                 html.A(
                     html.Img(
                         src="https://s3-us-west-1.amazonaws.com/plotly-tutorials/excel/dash-daq/dash-daq-logo-by-plotly-stripe+copy.png"
@@ -358,7 +358,7 @@ app.layout = html.Div(
                                                             style={
                                                                 "paddingBottom": "25%"
                                                             },
-                                                            disabled=False,
+                                                            disabled=True,
                                                         ),
                                                         daq.StopButton(
                                                             id="autotune-button",
@@ -467,7 +467,7 @@ app.layout = html.Div(
                                                             style={
                                                                 "paddingBottom": "13%"
                                                             },
-                                                            disabled=False,
+                                                            disabled=True,
                                                         ),
                                                         daq.NumericInput(
                                                             id="dev-gain",
@@ -480,7 +480,7 @@ app.layout = html.Div(
                                                             style={
                                                                 "paddingBottom": "21%"
                                                             },
-                                                            disabled=False,
+                                                            disabled=True,
                                                         ),
                                                         daq.StopButton(
                                                             id="manual-button",
@@ -521,7 +521,7 @@ app.layout = html.Div(
                                                             style={
                                                                 "paddingBottom": "5%"
                                                             },
-                                                            disabled=False,
+                                                            disabled=True,
                                                         ),
                                                         daq.NumericInput(
                                                             id="int-gain",
@@ -534,7 +534,7 @@ app.layout = html.Div(
                                                             style={
                                                                 "paddingBottom": "6%"
                                                             },
-                                                            disabled=False,
+                                                            disabled=True,
                                                         ),
                                                         html.Div(
                                                             [
@@ -1058,7 +1058,7 @@ def serial_monitor(
         + "\nDerivative Gain: "
         + dev_gain
         + "\n----------------READ ME---------------\n"
-        + "This application is designed for the Omega Platnium PID CN32PT-440-DC controller. You are currently "
+        + "This application is designed for the Omega Platinum PID CN32PT-440-DC controller. You are currently "
         + "viewing the mock application, with limited features. The mock app is designed to show the user "
         + "how this application would work if it was connected. All functions and features "
         + "are working and unlocked in the local version. For more information about how to create an "

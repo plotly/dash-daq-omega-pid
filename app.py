@@ -43,7 +43,7 @@ app.layout = html.Div(
             id="container",
             style={"background-color": "#119DFF"},
             children=[
-                html.H2("Dash DAQ: Omega Platnium Controller"),
+                html.H2("Dash DAQ: Omega Platinum Controller"),
                 html.A(
                     html.Img(
                         src="https://s3-us-west-1.amazonaws.com/plotly-tutorials/excel/dash-daq/dash-daq-logo-by-plotly-stripe+copy.png"
@@ -1098,7 +1098,7 @@ def serial_monitor(intervals):
         + "\nDerivative Gain: "
         + derivative_gain
         + "\n----------------READ ME---------------\n"
-        + "This application is designed for the Omega Platnium PID CN32PT-440-DC controller. You are currently "
+        + "This application is designed for the Omega Platinum PID CN32PT-440-DC controller. You are currently "
         + "viewing the local application. All functions and features "
         + "are working and unlocked in the local version. For more information about this application "
         + "refer to the read me,  or check out the blog post by clicking on the Dash-DAQ logo."
