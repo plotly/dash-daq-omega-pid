@@ -15,24 +15,8 @@ from dash.dependencies import State, Input, Output
 app = dash.Dash(__name__)
 
 server = app.server
-app.scripts.config.serve_locally = True
 
 df = pd.read_csv("control_curves.csv")
-
-
-
-# CSS Imports
-external_css = [
-    "https://codepen.io/chriddyp/pen/bWLwgP.css",
-    "https://cdn.rawgit.com/matthewchan15/dash-css-style-sheets/adf070fa/banner.css",
-    "https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i",
-    "https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i",
-]
-
-
-for css in external_css:
-    app.css.append_css({"external_url": css})
-
 
 app.layout = html.Div(
     [
@@ -338,7 +322,7 @@ app.layout = html.Div(
                                                 html.Div(
                                                     [
                                                         daq.BooleanSwitch(
-                                                            id="adaptive-switch",
+                                                            id="adaptive-switch-autotune",
                                                             label="Adaptive Control",
                                                             labelPosition="bottom",
                                                             on=True,
@@ -348,7 +332,6 @@ app.layout = html.Div(
                                                             },
                                                         ),
                                                         daq.NumericInput(
-                                                            id="max-rate",
                                                             label="Max Rate (/min)",
                                                             value=10,
                                                             max=10,
@@ -447,7 +430,7 @@ app.layout = html.Div(
                                                 html.Div(
                                                     [
                                                         daq.BooleanSwitch(
-                                                            id="adaptive-switch",
+                                                            id="adaptive-switch-manual",
                                                             label="Adaptive Control",
                                                             labelPosition="bottom",
                                                             on=True,
@@ -457,7 +440,6 @@ app.layout = html.Div(
                                                             },
                                                         ),
                                                         daq.NumericInput(
-                                                            id="max-rate",
                                                             label="Max Rate (/min)",
                                                             value=10,
                                                             max=10,
@@ -606,11 +588,9 @@ app.layout = html.Div(
                                             size=36,
                                         ),
                                         html.Div(
-                                            id="unit-holder",
                                             children=[
                                                 html.H5(
                                                     "C°",
-                                                    id="unit",
                                                     style={
                                                         "border-radius": "3px",
                                                         "border-width": "5px",
@@ -648,11 +628,9 @@ app.layout = html.Div(
                                             size=36,
                                         ),
                                         html.Div(
-                                            id="unit-holder",
                                             children=[
                                                 html.H5(
                                                     "PID%",
-                                                    id="unit",
                                                     style={
                                                         "border-radius": "3px",
                                                         "border-width": "5px",
@@ -1015,7 +993,6 @@ def set_point(command):
     [Input("graph-interval", "n_intervals"), 
     Input("autotune-button", "n_clicks")],
     [State("command-string", "children"),
-    State("max-rate", "value"),
     State("dev-gain", "value"),
     State("pro-gain", "value"),
     State("int-gain", "value"),
@@ -1026,14 +1003,16 @@ def serial_monitor(
     intervals,
     autotune_button,
     command,
-    max_rate,
     dev_gain,
     pro_gain,
     int_gain,
     autotune_time,
     autotune_timeout,
 ):
-    autotune_button_time = int(time.time() - autotune_time)
+    try:
+        autotune_button_time = int(time.time() - autotune_time)
+    except:
+        autotune_button_time = 0
     if command == "START":
         state = "Running"
     elif command == "AUTO" and autotune_button_time < autotune_timeout:
@@ -1065,7 +1044,6 @@ def serial_monitor(
         + "amazing app like this with Dash DAQ, check out the blog post by clicking on the Dash-DAQ logo."
     )
     return status
-
 
 # Data_set
 @app.callback(
