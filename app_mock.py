@@ -18,6 +18,8 @@ server = app.server
 
 df = pd.read_csv("control_curves.csv")
 
+app.scripts.config.serve_locally = True
+
 app.layout = html.Div(
     [
         html.Div(
